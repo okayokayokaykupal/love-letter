@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Rain Birthday Website</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: #fef3f7;
+            overflow: hidden;
+        }
+
+        #intro, #content {
+            text-align: center;
+            transition: opacity 1s ease;
+        }
+
+        #heart-icon {
+            font-size: 50px;
+            cursor: pointer;
+            animation: pulse 1.5s infinite;
+        }
+
+        #content.hidden {
+            display: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff5e75;
+            font-size: 24px;
+            opacity: 0;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        .slider {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            max-height: 300px;
+            margin-top: 20px;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+        }
+
+        .slider video {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+        }
+
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            font-size: 24px;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .nav-button.left {
+            left: 10px;
+        }
+
+        .nav-button.right {
+            right: 10px;
+        }
+
+        .section {
+            padding: 20px;
+            text-align: center;
+        }
+
+        #letter, #behind-scenes {
+            margin-top: 20px;
+        }
+
+        h1 {
+            color: #e63946;
+        }
+
+        @media (max-width: 600px) {
+            #heart-icon {
+                font-size: 40px;
+            }
+            #content h1 {
+                font-size: 1.5em;
+            }
+            #content p {
+                font-size: 1em;
+            }
+            .slider {
+                max-height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="intro">
+        <div id="heart-icon" onclick="triggerHeartRain()">💖</div>
+    </div>
+
+    <div id="content" class="hidden">
+        <div class="slider">
+            <div class="slides" id="slides">
+                <div class="slide"><video src="video1.mp4" autoplay muted></video></div>
+                <div class="slide"><video src="video2.mp4" muted></video></div>
+                <div class="slide"><video src="video3.mp4" muted></video></div>
+            </div>
+            <button class="nav-button left" onclick="prevSlide()">❮</button>
+            <button class="nav-button right" onclick="nextSlide()">❯</button>
+        </div>
+
+        <!-- Birthday Letter Section -->
+        <div id="letter" class="section">
+            <h1>Happy Birthday, Love!</h1>
+            <p>To my dearest,</p>
+            <p>Your presence brightens my days...</p>
+            <p>Forever yours,</p>
+            <p>Your Love ❤️</p>
+        </div>
+
+        <!-- Behind the Scenes Section -->
+        <div id="behind-scenes" class="section">
+            <h1>Behind the Scenes</h1>
+            <p>Here's a look into what it took to bring this birthday surprise to life...</p>
+        </div>
+    </div>
+
+    <script>
+        function triggerHeartRain() {
+            const intro = document.getElementById("intro");
+            const content = document.getElementById("content");
+
+            intro.style.opacity = 0;
+            setTimeout(() => {
+                intro.style.display = "none";
+                content.classList.remove("hidden");
+            }, 4000);
+
+            for (let i = 0; i < 100; i++) {
+                const heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+                heart.innerText = "❤️";
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 3700);
+            }
+        }
+
+        const slides = document.getElementById("slides");
+        const videos = slides.querySelectorAll("video");
+        let currentIndex = 0;
+
+        videos.forEach((video, index) => {
+            video.onended = () => {
+                nextSlide();
+            };
+        });
+
+        function showSlide(index) {
+            currentIndex = (index + videos.length) % videos.length;
+            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+            videos[currentIndex].play();
+        }
+
+        function nextSlide() {
+            videos[currentIndex].pause();
+            showSlide(currentIndex + 1);
+        }
+
+        function prevSlide() {
+            videos[currentIndex].pause();
+            showSlide(currentIndex - 1);
+        }
+
+        videos[currentIndex].play();
+    </script>
+</body>
+</html>
