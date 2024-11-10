@@ -11,21 +11,37 @@
             box-sizing: border-box;
         }
 
-        body, html {
+        body {
+		    margin: 0;
+			padding: 0;
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: Arial, sans-serif;
-            background: #fef3f7;
-            overflow: hidden;
+            background: lightpink;
         }
 
-        #intro, #content {
+        #intro {
+		    width: 100vw;
+			height: 100vh;
             text-align: center;
             transition: opacity 1s ease;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
         }
-
+        
+		 #content {
+            text-align: center;
+            transition: opacity 1s ease;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+        }
+		
         #heart-icon {
             font-size: 50px;
             cursor: pointer;
@@ -65,10 +81,9 @@
         }
 
         .slider {
-            width: 100%;
+            width: 100vw;
             overflow: hidden;
             position: relative;
-            max-height: 300px;
             margin-top: 20px;
         }
 
@@ -84,7 +99,7 @@
         .slider video {
             width: 100%;
             height: auto;
-            max-height: 300px;
+            max-height: 80vh;
         }
 
         .nav-button {
@@ -108,11 +123,24 @@
             right: 10px;
         }
 
-        .section {
+        .section, .section1 {
             padding: 20px;
-            text-align: center;
+			background-size: cover;
+            background-repeat: repeat;
+            background-color: #f5f2e8;
+			background-image: url('paper.jpg');
+			border: 5px solid #c2b280;
+			height: auto;
+			width: 60%;
         }
-
+        .section {
+		text-align: justify;
+		}
+		
+		.section1 {
+		text-align: center;
+		}
+		
         #letter, #behind-scenes {
             margin-top: 20px;
         }
@@ -120,7 +148,27 @@
         h1 {
             color: #e63946;
         }
+         
+		ul.grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px; 
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        }
 
+        ul.grid li {
+        border: 1px solid #ccc;
+		background-color: lightpink;
+        }
+
+        ul.grid li img {
+        width: 100%;
+        height: auto; 
+        display: block;
+        }
+		
         @media (max-width: 600px) {
             #heart-icon {
                 font-size: 40px;
@@ -134,7 +182,15 @@
             .slider {
                 max-height: 200px;
             }
+			
+			.photos {
+			    max-height: 200px;
+			}
+			  ul.grid {
+              grid-template-columns: 1fr; 
+            }
         }
+	
     </style>
 </head>
 <body>
@@ -155,17 +211,35 @@
 
         <!-- Birthday Letter Section -->
         <div id="letter" class="section">
-            <h1>Happy Birthday, Love!</h1>
-            <p>To my dearest,</p>
-            <p>Your presence brightens my days...</p>
-            <p>Forever yours,</p>
-            <p>Your Love ❤️</p>
+            <h1>Happy Birthday, Mahal!</h1>
+			<br>
+            <p style = "font-weight: 700;">To my dearest Asenath,</p>
+			<br>
+            <p>Thank you sa laging pag support sa side ko hehe, mahal na mahal kita. I wish you the happiest birthday and lagi mong tatandaan na nasa gilid mo lang ako palagi hehe. Love na love kita mahal. Tandaan mo na you're the first sa lahat ko and you'll also be the last sa lahat ko. I really really love you mahal. Kahit sa success or sa hirap, andito lang ako para tulungan ka sa problems mo hehe, I love you mahal ko bigggg mwahhhhh. Never ako magsasawa na sabihan ka ng maganda kasi you really are pretty hehe. Lagi mong tatandaan na deserve kita at worth it ka mahalin sa kahit ano mang mangyari sa buhay natin. I really really love you mahal mwahhhh. Although late celebration mo, always remember na we have to be thankful kasi we're still together kahit na maraming problems nangyari, we never gave up bb hehe kaya I'm very thankful na ikaw ang naging mahal ko sa buhay</p>
+			<br>
+            <div style = "text-align: left;">
+			<p>Forever yours,</p>
+            <p>Your Mahal❤️</p>
+			</div>
         </div>
 
         <!-- Behind the Scenes Section -->
-        <div id="behind-scenes" class="section">
-            <h1>Behind the Scenes</h1>
-            <p>Here's a look into what it took to bring this birthday surprise to life...</p>
+        <div id="behind-scenes" class="section1">
+            <h1>Hehe photos natin</h1>
+			<br>
+            <div class = "photos">
+			<ul class = "grid">
+			<li><img src="photo1.jpg" alt="Photo 1"></li>
+            <li><img src="photo2.jpg" alt="Photo 2"></li>
+            <li><img src="photo3.jpg" alt="Photo 3"></li>
+            <li><img src="photo4.jpg" alt="Photo 4"></li>
+            <li><img src="photo5.jpg" alt="Photo 5"></li>
+            <li><img src="photo6.jpg" alt="Photo 6"></li>
+            <li><img src="photo7.jpg" alt="Photo 7"></li>
+            <li><img src="photo8.jpg" alt="Photo 8"></li>
+            <li><img src="photo9.jpg" alt="Photo 9"></li>
+			</ul>
+			</div>
         </div>
     </div>
 
