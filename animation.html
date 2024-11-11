@@ -97,7 +97,13 @@
         }
 
         .slider video {
-            width: 100%;
+            width: 60%;
+            height: auto;
+            max-height: 80vh;
+        }
+		
+		.slider img {
+            width: 30%;
             height: auto;
             max-height: 80vh;
         }
@@ -205,9 +211,11 @@
     <div id="content" class="hidden">
         <div class="slider">
             <div class="slides" id="slides">
-                <div class="slide"><video src="video1.mp4" autoplay muted></video></div>
-                <div class="slide"><video src="video2.mp4" muted></video></div>
-                <div class="slide"><video src="video3.mp4" muted></video></div>
+                <div class="slide"><video controls src="video1.mp4"></video></div>
+                <div class="slide"><video controls src="video2.mp4"></video></div>
+                <div class="slide"><img src="ss1.jpg"></div>
+				<div class="slide"><img src="ss2.jpg"></div>
+				<div class="slide"><img src="ss3.jpg"></div>
             </div>
             <button class="nav-button left" onclick="prevSlide()">❮</button>
             <button class="nav-button right" onclick="nextSlide()">❯</button>
@@ -272,33 +280,44 @@
             }
         }
 
-        const slides = document.getElementById("slides");
-        const videos = slides.querySelectorAll("video");
-        let currentIndex = 0;
+       const slides = document.getElementById("slides");
+    const slideItems = slides.children;
+    let currentIndex = 0;
 
-        videos.forEach((video, index) => {
-            video.onended = () => {
-                nextSlide();
-            };
+    function showSlide(index) {
+        currentIndex = (index + slideItems.length) % slideItems.length;
+        slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+        Array.from(slideItems).forEach((item) => {
+            const video = item.querySelector("video");
+            if (video) {
+                video.pause();
+            }
         });
 
-        function showSlide(index) {
-            currentIndex = (index + videos.length) % videos.length;
-            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
-            videos[currentIndex].play();
+        const currentSlide = slideItems[currentIndex];
+        const currentVideo = currentSlide.querySelector("video");
+        if (currentVideo) {
+            currentVideo.play();
         }
+    }
 
-        function nextSlide() {
-            videos[currentIndex].pause();
-            showSlide(currentIndex + 1);
+    function nextSlide() {
+        showSlide(currentIndex + 1);
+    }
+
+    function prevSlide() {
+        showSlide(currentIndex - 1);
+    }
+
+    Array.from(slideItems).forEach((item) => {
+        const video = item.querySelector("video");
+        if (video) {
+            video.onended = nextSlide;
         }
+    });
 
-        function prevSlide() {
-            videos[currentIndex].pause();
-            showSlide(currentIndex - 1);
-        }
-
-        videos[currentIndex].play();
+    showSlide(currentIndex);
     </script>
 </body>
 </html>
